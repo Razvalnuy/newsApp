@@ -1,3 +1,4 @@
+"use client"
 import { UserOutlined } from "@ant-design/icons"
 import { Avatar, Card, List, Space, Tag, Typography } from "antd"
 
