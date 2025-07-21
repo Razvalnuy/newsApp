@@ -1,20 +1,21 @@
 "use client"
 
-import { List } from "antd"
-import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import type { AppDispatch } from "@/app/store"
 import {
 	fetchPosts,
 	selectAllPosts,
 	selectPostsError,
 	selectPostsStatus,
-} from "../../app/store/postsSlice"
+} from "@/app/store/postsSlice"
+import { List } from "antd"
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import styles from "./newsFeed.module.scss"
 import { NewsFeedItem } from "./newsFeedItem"
-import { NewsItem } from "./types"
+import type { NewsItem } from "./types"
 
 export default function NewsFeed() {
-	const dispatch = useDispatch()
+	const dispatch: AppDispatch = useDispatch()
 	const news: NewsItem[] = useSelector(selectAllPosts)
 	const status: "idle" | "loading" | "succeeded" | "failed" =
 		useSelector(selectPostsStatus)

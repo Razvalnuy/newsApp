@@ -1,13 +1,13 @@
-import { NewsItem } from "@/components/newsFeed/types"
+import type { NewsItem } from "@/components/newsFeed/types"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import axios from "axios"
-import { RootState } from "./index"
+import type { RootState } from "./index"
 
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
 	const response = await axios.get(
 		"https://dummyjson.com/posts?limit=10&skip=0"
 	)
-	return response.data.posts
+	return response.data.posts as NewsItem[]
 })
 
 interface PostsState {
