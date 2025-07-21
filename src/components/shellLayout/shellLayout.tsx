@@ -42,12 +42,12 @@ export function ShellLayout({ children }: { children: React.ReactNode }) {
 					className={styles.menu}
 				/>
 			</Sider>
-			<Layout className={styles.layoutContent}>
+			<div className={styles.layoutContent}>
 				<Content className={styles.content}>{children}</Content>
 				<Footer className={styles.footer}>
 					© Сделал Гаджибутаев Марат @razvalnuy
 				</Footer>
-			</Layout>
+			</div>
 		</Layout>
 	)
 }
