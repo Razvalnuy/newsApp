@@ -1,59 +1,53 @@
 "use client"
 
-import type { AppDispatch } from "@/app/store"
-import {
-	fetchPosts,
-	selectAllPosts,
-	selectPostsError,
-	selectPostsStatus,
-} from "@/app/store/postsSlice"
+import useLoadNewsOnScroll from "@/hooks/useLoadNewsOnScroll"
 import { List } from "antd"
-import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { ErrorFallback } from "../errorFallback"
+import { Loader } from "../loader"
+import { ScrollAnchor } from "../scrollAnchor"
 import styles from "./newsFeed.module.scss"
 import { NewsFeedItem } from "./newsFeedItem"
 import type { NewsItem } from "./types"
 
 export default function NewsFeed() {
-	const dispatch: AppDispatch = useDispatch()
-	const news: NewsItem[] = useSelector(selectAllPosts)
-	const status: "idle" | "loading" | "succeeded" | "failed" =
-		useSelector(selectPostsStatus)
-	const error: string | null = useSelector(selectPostsError)
+	const { ref, news, status, error } = useLoadNewsOnScroll()
 
-	useEffect(() => {
-		dispatch(fetchPosts())
-	}, [dispatch])
-
-	if (status === "loading") {
-		return (
-			<div className={styles.loaderWrapper}>
-				<div className={styles.loader}></div>
-			</div>
-		)
+	if (status === "loading" && news.length === 0) {
+		return <Loader isLoading={true} className={styles.loaderWrapper} />
 	}
 
 	if (status === "failed") {
 		return (
-			<div className={styles.error}>
-				Ошибка: {error || "Не удалось загрузить новости"}
-			</div>
+			<ErrorFallback
+				error={error}
+				message="Не удалось загрузить новости"
+				className={styles.error}
+			/>
 		)
 	}
 
 	if (!Array.isArray(news)) {
-		return <div className={styles.error}>Ошибка формата данных</div>
+		return (
+			<ErrorFallback message="Ошибка формата данных" className={styles.error} />
+		)
 	}
 
 	return (
-		<List
-			itemLayout="vertical"
-			dataSource={news}
-			renderItem={(item: NewsItem) => (
-				<List.Item className={styles.newsFeedItem}>
-					<NewsFeedItem news={item} />
-				</List.Item>
-			)}
-		/>
+		<>
+			<List
+				itemLayout="vertical"
+				dataSource={news}
+				renderItem={(item: NewsItem) => (
+					<List.Item>
+						<NewsFeedItem news={item} />
+					</List.Item>
+				)}
+			/>
+			<ScrollAnchor
+				ref={ref}
+				isLoading={status === "loading" && news.length > 0}
+				className={styles.anchor}
+			/>
+		</>
 	)
 }
