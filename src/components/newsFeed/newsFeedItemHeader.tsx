@@ -8,11 +8,9 @@ const { Text } = Typography
 
 export function NewsFeedItemHeader({
 	author,
-	date,
 	views,
 }: {
 	author: string
-	date: string
 	views: number
 }) {
 	return (
@@ -23,9 +21,6 @@ export function NewsFeedItemHeader({
 				className={styles.newsFeedAvatar}
 			/>
 			<Text type="secondary">{author}</Text>
-			<Text type="secondary" className={styles.newsFeedDate}>
-				{date}
-			</Text>
 			<Text type="secondary" className={styles.newsFeedViews}>
 				👁️‍🗨️ {views}
 			</Text>
