@@ -1,6 +1,7 @@
 "use client"
 import { UserOutlined } from "@ant-design/icons"
 import { Avatar, Card, List, Space, Tag, Typography } from "antd"
+import styles from "./newsFeed.module.scss"
 
 const { Title, Text } = Typography
 
@@ -9,63 +10,37 @@ export default function NewsFeed({ news }) {
 		<List
 			itemLayout="vertical"
 			dataSource={news}
-			style={{ display: "grid", gridTemplateColumns: "1fr", gap: 16 }}
+			className={styles.newsFeedList}
 			renderItem={(item) => (
-				<List.Item style={{ marginBottom: 0 }}>
-					<Card
-						hoverable
-						style={{ width: "100%", minHeight: 200, overflow: "hidden" }}
-						bodyStyle={{
-							padding: 16,
-							display: "flex",
-							flexDirection: "column",
-							height: "100%",
-						}}
-					>
-						<Space direction="vertical" style={{ width: "100%", flex: 1 }}>
+				<List.Item className={styles.newsFeedItem}>
+					<Card hoverable className={styles.newsFeedCard}>
+						<Space direction="vertical" className={styles.newsFeedCardBody}>
 							<Title level={4} style={{ marginBottom: 4 }}>
 								{item.title}
 							</Title>
-							<div
-								style={{
-									display: "flex",
-									alignItems: "center",
-									marginBottom: 8,
-								}}
-							>
+							<div className={styles.newsFeedHeader}>
 								<Avatar
 									size="small"
 									icon={<UserOutlined />}
-									style={{ marginRight: 8 }}
+									className={styles.newsFeedAvatar}
 								/>
 								<Text type="secondary">{item.author}</Text>
-								<Text type="secondary" style={{ marginLeft: 8 }}>
+								<Text type="secondary" className={styles.newsFeedDate}>
 									{item.date}
 								</Text>
-								<Text type="secondary" style={{ marginLeft: "auto" }}>
+								<Text type="secondary" className={styles.newsFeedViews}>
 									👁️‍🗨️ {item.views}
 								</Text>
 							</div>
-							<Text
-								style={{
-									display: "-webkit-box",
-									textOverflow: "ellipsis",
-									WebkitBoxOrient: "vertical",
-									WebkitLineClamp: 3,
-									overflow: "hidden",
-									flex: 1,
-								}}
-							>
-								{item.summary}
-							</Text>
-							<div style={{ marginTop: 8 }}>
+							<Text className={styles.newsFeedSummary}>{item.summary}</Text>
+							<div className={styles.newsFeedTags}>
 								<Space wrap>
 									{item.tags.map((tag) => (
 										<Tag key={tag}>{tag}</Tag>
 									))}
 								</Space>
 							</div>
-							<Space style={{ marginTop: 8 }}>
+							<Space className={styles.newsFeedReactions}>
 								<Text type="success">👍 {item.reaction.likes}</Text>
 								<Text type="danger">👎 {item.reaction.dislikes}</Text>
 							</Space>

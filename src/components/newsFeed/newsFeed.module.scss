@@ -1,0 +1,59 @@
+.newsFeedList {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 16px;
+}
+
+.newsFeedItem {
+	margin-bottom: 0;
+}
+
+.newsFeedCard {
+	width: 100%;
+	min-height: 200px;
+	overflow: hidden;
+	&:hover {
+	}
+}
+
+.newsFeedCardBody {
+	padding: 16px;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.newsFeedHeader {
+	display: flex;
+	align-items: center;
+	margin-bottom: 8px;
+}
+
+.newsFeedAvatar {
+	margin-right: 8px;
+}
+
+.newsFeedDate {
+	margin-left: 8px;
+}
+
+.newsFeedViews {
+	margin-left: auto;
+}
+
+.newsFeedSummary {
+	display: -webkit-box;
+	text-overflow: ellipsis;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
+	overflow: hidden;
+	flex: 1;
+}
+
+.newsFeedTags {
+	margin-top: 8px;
+}
+
+.newsFeedReactions {
+	margin-top: 8px;
+}

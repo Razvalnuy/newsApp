@@ -10,6 +10,7 @@ import { Layout, Menu, Space, Typography, type MenuProps } from "antd"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
+import styles from "./layout.module.scss"
 
 const { Header, Content, Footer, Sider } = Layout
 const { Title } = Typography
@@ -35,21 +36,14 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 		pathname === "/" ? "1" : pathname?.startsWith("/news") ? "4" : ""
 
 	return (
-		<Layout style={{ minHeight: "100vh", background: "#fff" }}>
+		<Layout className={styles.appLayout}>
 			<Sider
 				width={256}
 				collapsed={collapsed}
 				onCollapse={(val) => setCollapsed(val)}
-				style={{ background: "#fff", borderRight: "1px solid #f0f0f0" }}
+				className={styles.sider}
 			>
-				<div
-					style={{
-						height: 64,
-						display: "flex",
-						alignItems: "center",
-						justifyContent: "center",
-					}}
-				>
+				<div className={styles.siderHeader}>
 					<Title level={5} style={{ margin: 0 }}>
 						News
 					</Title>
@@ -58,25 +52,12 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 					mode="inline"
 					selectedKeys={selectedKey ? [selectedKey] : undefined}
 					items={items}
-					style={{ borderRight: 0 }}
+					className={styles.menu}
 				/>
 			</Sider>
-			<Layout>
-				<Header
-					style={{
-						padding: 0,
-						background: "#fff",
-						borderBottom: "1px solid #f0f0f0",
-					}}
-				>
-					<Space
-						style={{
-							padding: "0 24px",
-							height: 64,
-							display: "flex",
-							alignItems: "center",
-						}}
-					>
+			<Layout className={styles.layoutContent}>
+				<Header className={styles.header}>
+					<Space className={styles.headerSpace}>
 						{collapsed ? (
 							<MenuUnfoldOutlined onClick={() => setCollapsed(false)} />
 						) : (
@@ -84,23 +65,8 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 						)}
 					</Space>
 				</Header>
-				<Content
-					style={{
-						background: "#fff",
-						padding: 24,
-						margin: 0,
-						minHeight: 280,
-					}}
-				>
-					{children}
-				</Content>
-				<Footer
-					style={{
-						background: "#fff",
-						textAlign: "center",
-						borderTop: "1px solid #f0f0f0",
-					}}
-				>
+				<Content className={styles.content}>{children}</Content>
+				<Footer className={styles.footer}>
 					Сделал Гаджибутаев Марат{" "}
 					<a
 						target="_blank"
