@@ -1,23 +1,15 @@
-.newsFeedList {
-	display: grid;
-	grid-template-columns: 1fr;
-	gap: 16px;
-}
-
 .newsFeedItem {
-	margin-bottom: 0;
+	margin-bottom: 0px;
 }
 
 .newsFeedCard {
 	width: 100%;
 	min-height: 200px;
 	overflow: hidden;
-	&:hover {
-	}
 }
 
 .newsFeedCardBody {
-	padding: 16px;
+	padding: 6px;
 	display: flex;
 	flex-direction: column;
 	height: 100%;

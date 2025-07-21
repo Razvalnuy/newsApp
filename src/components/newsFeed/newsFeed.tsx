@@ -10,7 +10,6 @@ export default function NewsFeed({ news }) {
 		<List
 			itemLayout="vertical"
 			dataSource={news}
-			className={styles.newsFeedList}
 			renderItem={(item) => (
 				<List.Item className={styles.newsFeedItem}>
 					<Card hoverable className={styles.newsFeedCard}>
